@@ -1,122 +1,135 @@
-📘 MCSE-204 – UNIT 3: Memory Allocation, Code Optimization & Data Flow Analysis
+📘 MCSE-204 – UNIT 4: Distributed Operating Systems
 
 ────────────────────────────────────
-🔶 Q1. Techniques of Dynamic Storage Allocation
+🔶 **Q1. Design Issues in Distributed Operating Systems**
 
 ✅ Easy Definition:
-Dynamic storage allocation is a method used to allocate memory at runtime (when the program is running).
+A Distributed Operating System (DOS) manages a group of independent computers and makes them appear as one system.
 
 🌍 Real-world Analogy:
-Like booking a hotel room when you arrive at the destination — no pre-booking.
+Like a manager coordinating work between multiple office branches.
 
-📌 Techniques:
-
-1. **First Fit**:
-   - Allocates the first block that is large enough
-   - Fast, but may waste memory
-
-2. **Best Fit**:
-   - Allocates the smallest possible block that fits
-   - Reduces wasted space but takes more time
-
-3. **Worst Fit**:
-   - Allocates the largest block available
-   - Leaves larger free spaces but causes fragmentation
-
-📌 Use Case:
-Used in compilers, operating systems, and memory management units for variable storage, function calls, etc.
+📌 Major Design Issues:
+- **Transparency**
+  • Access, Location, Replication
+- **Fault Tolerance**
+- **Resource Management**
+- **Security**
+- **Scalability**
 
 📌 Summary Bullets:
-- Done during execution
-- More flexible than static allocation
-- May lead to fragmentation
-- Efficient use of memory if managed properly
+- Coordination between nodes is key
+- Must hide complexity from users
+- Secure and efficient resource sharing
 
 ────────────────────────────────────
-🔶 Q2. Unified Algorithm for Data Flow Analysis
+🔶 **Q2. Goals of Distributed Operating System & How Deadlocks Occur**
 
 ✅ Easy Definition:
-A single algorithm that can be adapted for multiple data flow problems such as reaching definitions, live variable analysis, etc.
+Goals define the purpose of a Distributed OS; deadlocks happen when processes wait indefinitely.
 
 🌍 Real-world Analogy:
-Like a single Swiss knife tool used for cutting, opening, screwing — same base tool for different uses.
+- Goal = Like team goals (collaboration, performance)
+- Deadlock = Everyone waiting on each other endlessly
 
-📌 Steps of the Unified Algorithm:
-1. **Initialization**:
-   - Set IN[B] and OUT[B] for each basic block B
+📌 Goals:
+- Transparency
+- Resource Sharing
+- Fault Tolerance
+- High Performance
+- Scalability
 
-2. **Iteration**:
-   - Repeat until IN and OUT values stop changing:
-     - IN[B] = ∪ OUT[P] for all predecessors P of B
-     - OUT[B] = (IN[B] - Kill[B]) ∪ Gen[B]
+📌 Deadlock Causes:
+- Mutual Exclusion
+- Hold and Wait
+- No Preemption
+- Circular Wait
 
-3. **Apply to**:
-   - Live variable analysis
-   - Available expressions
-   - Reaching definitions
-
-📌 Benefits:
-- Generic and reusable
-- Simplifies implementation
-- Reduces duplication
+📌 Deadlock Handling:
+- Centralized or hierarchical detection
+- Rollback or timeout
 
 📌 Summary:
-- Generalized data flow analysis technique
-- Works on control flow graph
-- Used for program optimization
+- Good design avoids deadlocks
+- Use detection/prevention techniques
 
 ────────────────────────────────────
-🔶 Q3. Explain Concurrentisation and Vectorisation
+🔶 **Q3. Kernel Actions During Page-In and Page-Out**
 
 ✅ Easy Definition:
-- **Concurrentisation**: Dividing program tasks to run in parallel.
-- **Vectorisation**: Converting scalar operations into vector (array-based) operations.
+Page-In loads memory from disk. Page-Out saves memory to disk.
 
 🌍 Real-world Analogy:
-- Concurrentisation = Multiple chefs cooking different dishes together.
-- Vectorisation = One chef making 10 sandwiches at once instead of one-by-one.
+Page-In = Taking a book from the shelf  
+Page-Out = Returning the book to the shelf
 
-📌 Concurrentisation:
-- Used in multi-core processors
-- Improves performance
-- Needs dependency analysis
+📌 Page-In Actions:
+- Identify required page
+- Find it on disk
+- Load into memory
+- Update tables
 
-📌 Vectorisation:
-- Used in scientific computing
-- Increases speed using SIMD (Single Instruction Multiple Data)
-- Requires loop analysis
+📌 Page-Out Actions:
+- Select page to remove
+- Check if modified
+- Save to disk
+- Update status
+
+📌 Summary:
+- Vital for memory management
+- Optimized to reduce delays
+
+────────────────────────────────────
+🔶 **Q4. Security Attacks in Distributed Systems**
+
+✅ Easy Definition:
+Security attacks are attempts to steal, destroy or alter data in distributed systems.
+
+🌍 Real-world Analogy:
+Like a cyber-thief breaking into one office and accessing the whole company.
+
+📌 Common Attacks:
+- Eavesdropping
+- Masquerading
+- Replay Attack
+- Denial of Service (DoS)
+- Data Modification
+
+📌 Prevention:
+- Authentication
+- Encryption
+- Firewalls & IDS
+
+📌 Summary:
+- Secure data during transfer and storage
+- Use strong security protocols
+
+────────────────────────────────────
+🔶 **Q5. Multiprocessor Operating System Structure (with Example)**
+
+✅ Easy Definition:
+Multiprocessor OS manages systems with multiple CPUs sharing memory and I/O.
+
+🌍 Real-world Analogy:
+Like multiple chefs sharing the same kitchen space.
+
+📌 Structures:
+1. Master-Slave
+2. Symmetric Multiprocessing (SMP)
 
 📌 Benefits:
-- Faster program execution
-- Better CPU and memory usage
-- Widely used in supercomputing and AI/ML
+- High speed
+- Fault tolerance
+- Balanced workload
 
-────────────────────────────────────
-🔶 Q4. Loop-Carried vs Loop-Independent Dependencies
-
-✅ Easy Definition:
-- **Loop-Carried Dependency**: When current iteration depends on a previous one.
-- **Loop-Independent Dependency**: No dependency between iterations.
-
-🌍 Real-world Analogy:
-- Carried: You can’t bake the second cake until the first one is done (uses same oven).
-- Independent: You can iron multiple clothes independently on multiple boards.
-
-📌 Loop-Carried:
-- Slows down parallel execution
-- Example:
-
-📌 Why Important:
-- Used in compiler optimization
-- Helps in deciding parallel execution
-- Reduces execution time if optimized
+📌 Summary:
+- Parallel processing
+- Careful scheduling needed
 
 ────────────────────────────────────
 📝 Summary (Keywords to Remember):
-- Dynamic Allocation = Memory at runtime
-- First Fit, Best Fit, Worst Fit = Memory allocation methods
-- Unified Algorithm = Generic data flow solution
-- Concurrentisation = Task-level parallelism
-- Vectorisation = Data-level parallelism
-- Loop-Carried = Serial
-- Loop-Independent = Parallel
+- DOS = Manages multiple systems as one
+- Design issues = Transparency, Fault Tolerance
+- Page-In/Out = Memory management
+- Security = Protect data and system
+- Multiprocessor = Shared workload
