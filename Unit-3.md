@@ -1,135 +1,122 @@
-# 📘 MCSE-204 – UNIT 4: Distributed Operating Systems
+# 📘 MCSE-204 – UNIT 3: Memory Allocation, Optimization & Data Flow Analysis
 
 ---
 
-## 🔶 🔥 Q1. DESIGN ISSUES IN DISTRIBUTED OPERATING SYSTEMS
+## 🔶 🔥 Q1. TECHNIQUES OF DYNAMIC STORAGE ALLOCATION
 
-✅ **Easy Definition**: A Distributed Operating System (DOS) manages multiple computers and presents them as a single system to the user.
+✅ **Easy Definition**: Dynamic storage allocation is the process of assigning memory at runtime depending on the program’s requirements.
 
-🌍 **Real-world Analogy**: Like a manager handling teams in different cities, making it feel like one company.
+🌍 **Real-world Analogy**: Like booking a hotel room after arriving in the city, instead of reserving it before.
 
-📌 **Major Design Issues**:
+📌 **Techniques**:
 
-* **Transparency**: Access, Location, Replication
-* **Fault Tolerance**
-* **Resource Management**
-* **Security**
-* **Scalability**
+* **First Fit**: Allocates the first free block that’s large enough
+* **Best Fit**: Allocates the smallest suitable free block
+* **Worst Fit**: Allocates the largest available free block
 
-📌 **Summary Bullets**:
+📌 **Comparison**:
 
-* Hides system complexity
-* Manages distributed hardware
-* Provides a unified interface
-* Ensures consistent performance and reliability
-
----
-
-## 🔶 🔥 Q2. GOALS OF DISTRIBUTED OS & HOW DEADLOCKS OCCUR
-
-✅ **Easy Definition**: Goals define the purpose of a Distributed OS; deadlocks are situations where processes get stuck waiting on each other forever.
-
-🌍 **Real-world Analogy**: Like team members all waiting on each other to move first – no one progresses.
-
-📌 **Goals**:
-
-* **Transparency**
-* **Resource Sharing**
-* **Fault Tolerance**
-* **Scalability**
-* **High Performance**
-
-📌 **Causes of Deadlock**:
-
-* Mutual Exclusion
-* Hold and Wait
-* No Preemption
-* Circular Wait
-
-📌 **Deadlock Handling Methods**:
-
-* Centralized Detection
-* Hierarchical Detection
-* Timeout and Rollback
+* First Fit: Fast but may leave small gaps
+* Best Fit: Less space wastage, but slower
+* Worst Fit: Leaves large holes, not efficient
 
 📌 **Summary**:
 
-* Deadlocks must be detected or prevented
-* Goals ensure effective and smooth operation
+* Allocates memory during execution
+* Can cause fragmentation if not managed
+* Helps in flexible and optimized memory use
 
 ---
 
-## 🔶 🔥 Q3. KERNEL ACTIONS DURING PAGE-IN AND PAGE-OUT
+## 🔶 🔥 Q2. UNIFIED ALGORITHM FOR DATA FLOW ANALYSIS
 
-✅ **Easy Definition**: Page-In loads a memory page from disk to RAM; Page-Out writes a page from RAM back to disk.
+✅ **Easy Definition**: A single generalized algorithm used to solve various data flow problems (like reaching definitions, live variables, etc.).
 
-🌍 **Real-world Analogy**: Borrowing a book from the library (page-in), and returning it later (page-out).
+🌍 **Real-world Analogy**: Like a single Swiss army knife for multiple repair jobs.
 
-📌 **Page-In Steps**:
+📌 **Steps**:
 
-* Locate the required page
-* Allocate memory in RAM
-* Load the page from disk
-* Update page table and TLB
+1. Initialize IN\[B] and OUT\[B] for each basic block B
+2. Repeat until stable (no change in values):
 
-📌 **Page-Out Steps**:
+   * IN\[B] = Union of OUT of predecessors
+   * OUT\[B] = (IN\[B] – Kill\[B]) ∪ Gen\[B]
 
-* Choose a page to evict
-* If modified, write it to disk
-* Update memory map
+📌 **Used For**:
+
+* Live variable analysis
+* Available expressions
+* Constant propagation
 
 📌 **Summary**:
 
-* Improves memory efficiency
-* Key part of virtual memory systems
+* One approach for many problems
+* Works on control flow graphs
+* Used heavily in compiler optimization
 
 ---
 
-## 🔶 🔥 Q4. SECURITY ATTACKS IN DISTRIBUTED SYSTEMS
+## 🔶 🔥 Q3. CONCURRENTISATION AND VECTORIZATION
 
-✅ **Easy Definition**: Unauthorized activities aimed at accessing or damaging data in a distributed network.
+✅ **Easy Definition**:
 
-🌍 **Real-world Analogy**: Like a thief breaking into one office and trying to access the entire organization’s system.
+* **Concurrentisation**: Dividing program parts to run in parallel.
+* **Vectorisation**: Converting operations on single values into operations on arrays or vectors.
 
-📌 **Types of Attacks**:
+🌍 **Real-world Analogy**:
 
-* **Eavesdropping**: Listening to communication
-* **Masquerading**: Impersonating a legitimate user
-* **Replay Attacks**: Resending old messages
-* **Denial of Service (DoS)**: Flooding to disrupt service
-* **Modification**: Altering data
+* Concurrentisation: Multiple chefs cooking separate dishes
+* Vectorisation: One chef preparing many sandwiches at once
 
-📌 **Prevention Techniques**:
+📌 **Concurrentisation**:
 
-* Authentication (e.g., passwords, biometrics)
-* Encryption (SSL/TLS)
-* Firewalls and Intrusion Detection Systems (IDS)
+* Improves performance on multi-core systems
+* Requires analyzing data dependencies
+
+📌 **Vectorisation**:
+
+* Uses SIMD (Single Instruction, Multiple Data)
+* Boosts performance in loops and math operations
 
 📌 **Summary**:
 
-* Secure data at rest and in transit
-* Implement robust authentication and monitoring
+* Increases speed and efficiency
+* Common in scientific computing, AI, and HPC
 
 ---
 
-## 🔶 🔥 Q5. MULTIPROCESSOR OS STRUCTURE (WITH EXAMPLE)
+## 🔶 🔥 Q4. LOOP-CARRIED VS LOOP-INDEPENDENT DEPENDENCIES
 
-✅ **Easy Definition**: A multiprocessor OS manages multiple CPUs that share memory and devices, ensuring coordination and task distribution.
+✅ **Easy Definition**:
 
-🌍 **Real-world Analogy**: Like multiple chefs working in one kitchen, sharing utensils and space efficiently.
+* **Loop-Carried**: Current iteration depends on previous one
+* **Loop-Independent**: Each iteration is independent
 
-📌 **Structures**:
+🌍 **Real-world Analogy**:
 
-* **Master-Slave**: One CPU controls the others
-* **Symmetric Multiprocessing (SMP)**: All CPUs are treated equally
+* Loop-Carried: You can’t fill the next bucket until the first is done
+* Loop-Independent: You can fill all buckets at once using multiple taps
 
-📌 **Benefits**:
+📌 **Examples**:
 
-* Increased speed and parallelism
-* Fault Tolerance
-* Load balancing
+* **Loop-Carried**: `A[i] = A[i-1] + 1`
+* **Loop-Independent**: `A[i] = B[i] + C[i]`
+
+📌 **Importance**:
+
+* Helps compilers decide if loops can be parallelized
 
 📌 **Summary**:
 
-* Allows better resource use
-* Enhances system performance through concurrency
+* Loop-Carried = Serial execution
+* Loop-Independent = Safe for parallel execution
+
+---
+
+📝 **Quick Recap:**
+
+* Dynamic Allocation = Runtime memory assignment
+* Unified Algorithm = Generic data flow model
+* Concurrentisation = Task parallelism
+* Vectorisation = Data parallelism
+* Loop-Carried vs Independent = Key for optimization
